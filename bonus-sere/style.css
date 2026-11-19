@@ -1,103 +1,89 @@
-@import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
 
+/* Colori della copertina (15-copertina-mappa-ppb.pdf) */
 :root{
-  --carta:#fbfaf6;
-  --inchiostro:#1b1b1b;
-  --matita:#5a5a5a;
-  --riga:#d9d6cc;
-  --fondino:#efece4;
+  --carta:#f6e2c4;
+  --foglio:#fdf5e8;
+  --inchiostro:#13263f;
+  --matita:#5b5346;
+  --riga:#e2c9a4;
+  --fondino:#ead2ad;
+  --rosso:#b23a2b;
+  --oliva:#5b5a21;
+  --blu:#1e3d61;
+  --marrone:#7a4520;
+  --titoli:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
-  margin:0;background:var(--carta);color:var(--inchiostro);
-  font-family:'Literata',Georgia,'Times New Roman',serif;
+  margin:0;color:var(--inchiostro);
+  font-family:'Source Serif 4',Georgia,'Times New Roman',serif;
   font-size:18px;line-height:1.6;
+  background-color:var(--carta);
+  /* curve di livello, come la mappa della copertina */
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480' viewBox='0 0 480 480'%3E%3Cg fill='none' stroke='%23dcbf95' stroke-width='1.3' opacity='.45'%3E%3Cpath d='M-20 70c60-40 120 30 190 0s120-60 200-20 90 40 130 10'/%3E%3Cpath d='M-20 100c70-35 130 35 200 5s110-55 190-15 100 45 130 15'/%3E%3Cpath d='M-20 300c50 30 110-40 180-10s130 70 200 30 90-30 140 0'/%3E%3Cpath d='M-20 330c55 30 120-35 190-5s120 65 190 25 100-25 140 5'/%3E%3Cpath d='M300 190c40-30 110-20 120 25s-40 75-95 65-75-60-25-90z'/%3E%3Cpath d='M318 200c30-18 80-10 86 20s-30 52-68 45-50-42-18-65z'/%3E%3Cpath d='M90 190c35-25 95-15 100 20s-35 60-80 52-55-48-20-72z'/%3E%3Cpath d='M-20 440c70-25 140 25 210 0s130-40 300 10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:480px 480px;
 }
 .pagina{max-width:640px;margin:0 auto;padding:28px 18px 64px}
 .etichetta{
-  font-size:12px;letter-spacing:.32em;text-transform:uppercase;
-  color:var(--matita);text-align:center;margin:0 0 18px;
+  font-family:var(--titoli);font-weight:700;font-size:14px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--inchiostro);text-align:center;margin:0 0 18px;
 }
-h1{font-size:34px;line-height:1.2;text-align:center;margin:0 0 6px;font-weight:700}
-h2{font-size:24px;line-height:1.25;margin:40px 0 10px;font-weight:700}
-h3{font-size:19px;margin:0 0 6px;font-weight:700}
-.filetto{width:84px;height:0;border-top:1.5px solid var(--inchiostro);margin:14px auto 26px}
+h1,h2,h3{font-family:var(--titoli);text-transform:uppercase;color:var(--inchiostro)}
+h1{font-size:44px;line-height:1.02;text-align:center;margin:0 0 6px;font-weight:800;letter-spacing:.01em}
+h2{font-size:28px;line-height:1.1;margin:40px 0 10px;font-weight:800}
+h3{font-size:23px;line-height:1.1;margin:0 0 6px;font-weight:700;letter-spacing:.02em}
+.filetto{width:84px;height:0;border-top:3px solid var(--rosso);margin:14px auto 26px}
 p{margin:0 0 14px}
-.attacco::first-line{font-variant:small-caps;letter-spacing:.06em}
 .centro{text-align:center}
 .firma{margin-top:22px;text-align:right;font-style:italic}
 .figura{display:block;max-width:100%;height:auto;margin:22px auto}
-.figura.piccola{max-width:220px}
 
-.passi{display:flex;justify-content:center;gap:10px;margin:0 0 22px;font-size:13px;letter-spacing:.18em;text-transform:uppercase}
-.passi span{border:1.5px solid var(--inchiostro);border-radius:999px;padding:3px 12px;color:var(--matita);border-color:var(--riga)}
-.passi span.attivo{color:var(--inchiostro);border-color:var(--inchiostro);font-weight:600}
+.passi{display:flex;justify-content:center;gap:10px;margin:0 0 22px;font-family:var(--titoli);font-weight:700;font-size:15px;letter-spacing:.2em;text-transform:uppercase}
+.passi span{border:2px solid var(--riga);border-radius:999px;padding:3px 14px;color:var(--matita);background:var(--foglio)}
+.passi span.attivo{color:#fff;border-color:var(--inchiostro);background:var(--inchiostro)}
 
 .bottone{
   display:block;width:100%;text-align:center;text-decoration:none;cursor:pointer;
-  font:inherit;font-weight:600;font-size:18px;
-  background:var(--inchiostro);color:var(--carta);
-  border:2px solid var(--inchiostro);border-radius:10px;padding:15px 18px;margin:12px 0;
+  font-family:var(--titoli);font-weight:700;font-size:22px;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--inchiostro);color:var(--foglio);
+  border:2px solid var(--inchiostro);border-radius:8px;padding:13px 18px;margin:12px 0;
 }
-.bottone.vuoto{background:transparent;color:var(--inchiostro)}
+.bottone.vuoto{background:var(--foglio);color:var(--inchiostro)}
 .bottone:active{transform:translateY(1px)}
+.bottone:focus-visible{outline:3px solid var(--rosso);outline-offset:3px}
 
 .riquadro{
-  border:2px solid var(--inchiostro);border-radius:6px;padding:20px 18px;margin:26px 0;
-  background:#fff;position:relative;
+  border:2px solid var(--inchiostro);border-radius:6px;padding:22px 18px 18px;margin:30px 0;
+  background:var(--foglio);position:relative;box-shadow:6px 6px 0 var(--fondino);
 }
-.riquadro.tratteggio{border-style:dashed}
+.riquadro.tratteggio{border-style:dashed;border-color:var(--rosso)}
 .riquadro .nastro{
-  position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-2deg);
-  background:var(--fondino);border:1px solid var(--riga);
-  font-size:12px;letter-spacing:.25em;text-transform:uppercase;padding:3px 14px;white-space:nowrap;
+  position:absolute;top:-15px;left:50%;transform:translateX(-50%) rotate(-3deg);
+  background:var(--foglio);border:2px solid var(--rosso);color:var(--rosso);border-radius:4px;
+  font-family:var(--titoli);font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase;padding:2px 14px;white-space:nowrap;
 }
-.scheda{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-top:1px solid var(--riga)}
+.scheda{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-top:2px solid var(--riga)}
 .scheda:first-of-type{border-top:0}
 .scheda .num{
-  flex:0 0 44px;height:44px;border:2px solid var(--inchiostro);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;
+  flex:0 0 44px;height:44px;border-radius:50%;background:var(--rosso);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:var(--titoli);font-weight:800;font-size:24px;
 }
 .scheda .testo{flex:1}
 .scheda .testo p{margin:0 0 8px;font-size:16px}
-.per-grandi{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--matita)}
+.scheda .dorso{display:block;height:8px;border-radius:2px;margin:0 0 10px;width:72px}
 
 label{display:block;font-weight:600;margin:12px 0 6px;font-size:16px}
-input[type=text],input[type=number]{
-  width:100%;font:inherit;font-size:18px;padding:12px 12px;
-  border:2px solid var(--inchiostro);border-radius:8px;background:var(--carta);
-}
-.riga-campi{display:flex;gap:10px}
-.riga-campi>div{flex:1}
-.scelta{display:flex;gap:14px;font-size:16px;margin-top:4px}
-.scelta label{font-weight:400;margin:0;display:flex;align-items:center;gap:6px}
-.avviso{border-left:3px solid var(--inchiostro);padding:8px 12px;background:var(--fondino);font-size:16px;margin-top:10px;display:none}
 .nota{font-size:14px;color:var(--matita)}
 footer{margin-top:48px;text-align:center;font-size:13px;color:var(--matita)}
 
-/* pulsante della recensione: brilla e respira */
-.bottone.brilla{position:relative;overflow:hidden;animation:respira 1.8s ease-in-out infinite;box-shadow:4px 4px 0 var(--riga)}
+/* pulsante della recensione: rosso, brilla e respira */
+.bottone.brilla{position:relative;overflow:hidden;background:var(--rosso);border-color:var(--rosso);color:#fff;
+  animation:respira 1.8s ease-in-out infinite;box-shadow:4px 4px 0 var(--inchiostro)}
 .bottone.brilla::after{content:"";position:absolute;top:-50%;left:-60%;width:40%;height:200%;
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:rotate(18deg);
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:rotate(18deg);
   animation:luccica 2.6s ease-in-out infinite}
 @keyframes respira{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.04) rotate(-.6deg)}}
 @keyframes luccica{0%{left:-60%}55%,100%{left:130%}}
-.bottone.nascosto{opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .8s ease,transform .8s ease,visibility 0s linear .8s}
-.bottone.nascosto.visibile{opacity:1;visibility:visible;transform:none;transition:opacity .8s ease,transform .8s ease}
 @media (prefers-reduced-motion:reduce){.bottone.brilla,.bottone.brilla::after{animation:none}}
-
-/* carosello degli altri libri */
-.serie{margin-top:44px;padding-top:8px;border-top:1.5px solid var(--inchiostro)}
-.carosello{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 4px 18px;margin:0 -18px;padding-left:18px;padding-right:18px;-webkit-overflow-scrolling:touch}
-.libro{flex:0 0 68%;max-width:240px;scroll-snap-align:center;text-decoration:none;color:var(--inchiostro);
-  background:#fff;border:1.5px solid var(--inchiostro);border-radius:6px;padding:12px;box-shadow:5px 5px 0 var(--fondino);
-  display:flex;flex-direction:column;gap:6px;transition:transform .2s ease}
-.libro:hover{transform:translateY(-3px)}
-.libro img{width:100%;aspect-ratio:2/3;object-fit:cover;border:1px solid var(--riga);border-radius:2px;background:var(--fondino)}
-.libro .eta{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--matita);margin-top:4px}
-.libro strong{font-size:16px;line-height:1.3}
-.libro .vai{margin-top:auto;font-weight:600;font-size:15px;border-top:1px dashed var(--riga);padding-top:8px}
-@media (min-width:640px){.carosello{margin:0;padding-left:4px;padding-right:4px}.libro{flex-basis:31%}}
-.libro .stelle{font-size:17px;letter-spacing:.08em;color:#c58a00;line-height:1}
-.libro .stelle em{font-style:normal;font-size:12px;letter-spacing:.04em;color:var(--matita);margin-left:4px}

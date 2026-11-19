@@ -5,26 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Thank You | The 3-in-1 Survival Manual</title>
-<link rel="stylesheet" href="style.css?v=1">
-<link rel="stylesheet" href="quaderno.css?v=1">
+<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="quaderno.css?v=2">
 <style>
-.copertina{display:block;width:100%;max-width:520px;height:auto;margin:0 auto -18px;position:relative;z-index:1}
-.foglio-quaderno h1.grande{font-size:44px;letter-spacing:.01em}
-.dentro{list-style:none;margin:8px 0 0;padding:0 0 0 22px}
-.dentro li{display:flex;gap:12px;align-items:center;font-size:17px;line-height:32px;margin:0}
-.dentro li span{flex:0 0 26px;height:26px;border:1.5px solid var(--inchiostro);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:#fff}
-.timbro{position:absolute;right:18px;top:22px;transform:rotate(9deg);border:2px solid #a12a1f;color:#a12a1f;border-radius:6px;padding:4px 10px;font-size:12px;letter-spacing:.2em;font-weight:700;text-transform:uppercase;opacity:.85}
+.copertina{display:block;width:78%;max-width:400px;height:auto;margin:0 auto -22px;position:relative;z-index:1;
+  border-radius:3px;box-shadow:8px 10px 0 var(--fondino),0 6px 22px rgba(19,38,63,.28)}
+.foglio-quaderno h1.grande{font-size:52px;letter-spacing:.01em}
+.dentro{list-style:none;margin:10px 0 0;padding:0 0 0 22px}
+.dentro li{display:flex;gap:12px;align-items:center;font-family:var(--titoli);font-weight:700;font-size:20px;letter-spacing:.03em;
+  text-transform:uppercase;line-height:1.15;color:#fff;margin:0 0 6px;padding:8px 12px;border-radius:3px;
+  box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),2px 3px 0 rgba(19,38,63,.18)}
+.dentro li:nth-child(1){background:var(--oliva)}
+.dentro li:nth-child(2){background:var(--blu)}
+.dentro li:nth-child(3){background:var(--marrone)}
+.dentro li span{flex:0 0 28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;background:var(--rosso);color:#fff}
+.timbro{position:absolute;right:14px;top:16px;transform:rotate(12deg);width:86px;height:86px;border-radius:50%;
+  border:3px solid var(--rosso);outline:1.5px solid var(--rosso);outline-offset:-8px;color:var(--rosso);
+  display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--titoli);font-weight:800;
+  font-size:14px;line-height:1.05;letter-spacing:.12em;text-transform:uppercase;background:rgba(253,245,232,.85)}
+@media (max-width:480px){.dentro{padding-left:16px}.dentro li{font-size:17px}.timbro{width:72px;height:72px;font-size:12px;right:8px;top:10px}.foglio-quaderno h1.grande{font-size:44px}}
 </style>
 </head>
 <body>
 <main class="pagina">
   <p class="etichetta">The 3-in-1 Survival Manual</p>
 
-  <img class="copertina" src="mockup/bonus-tutti.png" alt="The three extra resources of the book: the Scenario Drill, the Blackout and Safe-Water Calculator, the Power-Out Wall Cards">
+  <img class="copertina" src="img/copertina.jpg" alt="Cover of The 3-in-1 AFR 64-4, FM 21-76 &amp; AFH 10-644 (SERE) Survival Manual for Home and Field by Clayton R. Brisco">
 
   <div class="foglio-quaderno">
     <span class="scotch sx"></span><span class="scotch dx"></span>
-    <span class="timbro">New reader</span>
+    <span class="timbro">New<br>reader</span>
     <h1 class="grande">Thank You!</h1>
     <p>The manual is yours now.</p>
     <p>Waiting for you here:</p>

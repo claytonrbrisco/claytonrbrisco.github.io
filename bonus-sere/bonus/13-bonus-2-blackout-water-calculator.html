@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App</title>
+<style>
+:root { --acc: #1f3a5f; --sec: #e9b949; --ok: #1e7d4f; --ko: #b3261e; --bg: #f5f6f8; --card: #ffffff;
+  --ink: #1b1f24; --muted: #5f6873; --line: #dde1e6; --r: 14px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%; }
+header.app { background: var(--acc); color: #fff; padding: 18px 16px 16px; }
+header.app .in, main .in, footer.app .in { max-width: 860px; margin: 0 auto; }
+header.app .et { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--sec); }
+header.app h1 { margin: 4px 0 2px; font-size: 24px; line-height: 1.15; }
+header.app .sub { opacity: .9; font-size: 14px; }
+main { padding: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; margin: 0 0 14px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+h2 { font-size: 19px; margin: 0 0 10px; color: var(--acc); }
+h3 { font-size: 16px; margin: 14px 0 6px; }
+.muted { color: var(--muted); font-size: 14px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.grow { flex: 1 1 auto; }
+button, .btn { font: inherit; border: 0; border-radius: 10px; padding: 11px 16px; cursor: pointer; background: var(--acc);
+  color: #fff; font-weight: 600; min-height: 44px; }
+button.sec, .btn.sec { background: #e8ecf1; color: var(--ink); }
+button.ghost { background: transparent; color: var(--acc); border: 1px solid var(--line); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--sec); outline-offset: 2px; }
+input[type=text], input[type=number], input[type=date], select, textarea { font: inherit; padding: 10px 12px;
+  border: 1px solid var(--line); border-radius: 10px; background: #fff; min-height: 44px; width: 100%; }
+label.lab { display: block; font-weight: 600; margin: 10px 0 4px; font-size: 14px; }
+.pill { display: inline-block; padding: 3px 10px; border-radius: 999px; background: #eef2f7; color: var(--acc);
+  font-size: 12px; font-weight: 600; }
+.bar { height: 10px; background: #e8ecf1; border-radius: 999px; overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--ok); width: 0; transition: width .3s; }
+.ok { color: var(--ok); } .ko { color: var(--ko); }
+table.t { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.t th { text-align: left; background: #eef2f7; padding: 8px; }
+table.t td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+footer.app { padding: 18px 16px 30px; color: var(--muted); font-size: 12px; }
+footer.app p { margin: 4px 0; }
+.nascosto { display: none !important; }
+.modale { position: fixed; inset: 0; background: rgba(10,15,25,.55); display: flex; align-items: center;
+  justify-content: center; padding: 16px; z-index: 50; }
+.modale .card { max-width: 440px; width: 100%; }
+#porta { min-height: 60vh; display: flex; align-items: center; justify-content: center; }
+#porta .card { max-width: 420px; width: 100%; }
+@media (max-width: 520px) { header.app h1 { font-size: 21px; } main { padding: 12px; } .card { padding: 14px; } }
+@media print { header.app, footer.app, button { display: none !important; } body { background: #fff; } .card { border: 0; box-shadow: none; } }
+
+.campi { display: grid; gap: 4px 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.ris { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 14px; }
+.ris .r { background: #f4f6f1; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.ris .v { font-size: 30px; font-weight: 800; color: var(--acc); line-height: 1.1; }
+.ris .u { font-size: 14px; color: var(--muted); }
+.ris .r.scaduto { background: #fbecea; border-color: #e7b9b3; }
+.ris .r.scaduto .v { color: var(--ko); }
+.nota { font-size: 14px; color: var(--muted); margin: 10px 0 0; }
+.avviso { border-left: 6px solid var(--sec); }
+.avviso ul { margin: 0; padding-left: 20px; } .avviso li { margin: 6px 0; }
+.salti { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.salti a { display: inline-block; padding: 8px 12px; border-radius: 999px; background: #eef1ea; color: var(--acc); font-weight: 600; font-size: 14px; text-decoration: none; }
+.intro p { margin: 0; }
+.prima { margin-top: 10px; align-items: flex-end; }
+.prima .lab { flex: 1 1 100%; margin-bottom: 0; }
+.prima input { flex: 0 0 120px; width: 120px; }
+.stato { font-size: 17px; margin: 14px 0 0; }
+  .solo-stampa { display: none; }
+@media print {
+  .solo-stampa { display: block !important; }
+  section.card { display: none !important; }
+  section#sez_riepilogo, section#sez_limiti, section#sez_generatore { display: block !important; }
+}
+
+</style></head>
+<body>
+<header class="app"><div class="in"><div class="et"></div><h1></h1><div class="sub"></div></div></header>
+<main><div class="in">
+<section class="card intro">
+  <p id="t_intro"></p>
+  <nav class="salti" id="salti"></nav>
+</section>
+
+<section class="card avviso" id="sez_generatore">
+  <h2 id="t_generatore"></h2>
+  <ul id="generatore"></ul>
+</section>
+
+<section class="card" id="sez_acqua">
+  <h2 id="t_acqua"></h2>
+  <p class="muted" id="t_acqua_intro"></p>
+  <div class="campi">
+    <div><label class="lab" for="persone" id="t_persone"></label><input id="persone" type="number" inputmode="numeric" min="1" max="30" step="1" value="4"></div>
+  </div>
+  <div class="ris" id="ris_acqua"></div>
+  <p class="nota" id="t_acqua_nota"></p>
+</section>
+
+<section class="card" id="sez_candeggina">
+  <h2 id="t_candeggina"></h2>
+  <p class="muted" id="t_candeggina_intro"></p>
+  <div class="campi">
+    <div><label class="lab" for="quantita" id="t_quantita"></label><input id="quantita" type="number" inputmode="decimal" min="0.1" max="500" step="any" value="1"></div>
+    <div><label class="lab" for="unita" id="t_unita"></label><select id="unita"><option value="gal" id="t_gal"></option><option value="l" id="t_l"></option></select></div>
+    <div><label class="lab" for="forza" id="t_forza"></label><select id="forza"><option value="6" id="t_f6"></option><option value="8.25" id="t_f825"></option><option value="altra" id="t_faltra"></option></select></div>
+    <div><label class="lab" for="acqua_tipo" id="t_acqua_tipo"></label><select id="acqua_tipo"><option value="limpida" id="t_limpida"></option><option value="torbida" id="t_torbida"></option></select></div>
+  </div>
+  <div class="ris" id="ris_candeggina"></div>
+  <p class="nota" id="t_candeggina_nota"></p>
+</section>
+
+<section class="card" id="sez_bollitura">
+  <h2 id="t_bollitura"></h2>
+  <p class="muted" id="t_bollitura_intro"></p>
+  <div class="campi">
+    <div><label class="lab" for="quota" id="t_quota"></label><input id="quota" type="number" inputmode="numeric" min="0" max="20000" step="1" value="500"></div>
+    <div><label class="lab" for="quota_unita" id="t_quota_unita"></label><select id="quota_unita"><option value="ft" id="t_ft"></option><option value="m" id="t_m"></option></select></div>
+  </div>
+  <div class="ris" id="ris_bollitura"></div>
+  <p class="nota" id="t_bollitura_nota"></p>
+</section>
+
+<section class="card avviso" id="sez_limiti">
+  <h2 id="t_limiti"></h2>
+  <ul id="limiti"></ul>
+</section>
+
+<section class="card" id="sez_frigo">
+  <h2 id="t_frigo"></h2>
+  <p class="muted" id="t_frigo_intro"></p>
+  <div class="row">
+    <button id="spenta"></button>
+    <button class="sec" id="tornata"></button>
+  </div>
+  <div class="row prima">
+    <label class="lab" for="ore_fa" id="t_ore_fa"></label>
+    <input id="ore_fa" type="number" inputmode="decimal" min="0" max="96" step="0.5" placeholder="0">
+    <button class="ghost" id="segna_prima"></button>
+  </div>
+  <p id="frigo_stato" class="stato"></p>
+  <div class="ris" id="ris_frigo"></div>
+  <p class="nota" id="t_frigo_regola"></p>
+  <p class="nota" id="t_frigo_medicine"></p>
+  <p class="nota" id="t_frigo_limite"></p>
+</section>
+
+<section class="card" id="sez_riepilogo">
+  <h2 id="t_riepilogo"></h2>
+  <p class="muted" id="t_riepilogo_intro"></p>
+  <div id="riepilogo"></div>
+  <div class="row" style="margin-top:12px"><button id="stampa"></button></div>
+</section>
+
+</div></main>
+<footer class="app"><div class="in"></div></footer>
+<script>
+const CONFIG = {"titolo": "The Blackout & Safe-Water Calculator", "avvertenza": "These tools are reminders of the rules in the book, not medical advice. In an emergency, call 911.", "non_affiliato": "Not affiliated with or endorsed by the U.S. Air Force or the U.S. Army.", "testi": {"etichetta": "Extra content", "per_lettori": "For readers of", "memoria": "Your numbers and the fridge clock are saved only in this browser, on this device.", "intro": "Four tools for your own house, built on the rules in the book: the water to store, the drops of bleach, the boiling time and the fridge clock. First, the generator rules.", "s_acqua": "Water to store", "s_candeggina": "Bleach", "s_bollitura": "Boiling", "s_frigo": "Fridge clock", "s_generatore": "Generator first", "acqua": "1 · Water to store", "acqua_intro": "At least 1 gallon per person per day, for drinking and washing (Skill 8.1-3).", "persone": "People in the house", "minimo": "At least: 3 days", "obiettivo": "If you can: 2 weeks", "galloni": "gallons", "litri": "liters", "acqua_nota": "Store at least 3 days’ worth for everyone at home, 2 weeks if you can. Needs can double in very hot weather. Don’t ration drinking water unless officials tell you to. Sources: CDC, Ready.gov · Book: Skill 8.1-3, 8.4-1.", "controlla_persone": "Enter how many people live in the house (1 to 30).", "candeggina": "2 · Drops of bleach", "candeggina_intro": "For when you can’t boil. Plain bleach under a year old: not scented, not color-safe, no added cleaners (Skill 8.3-4).", "quantita": "Size of the container", "unita": "Unit", "gal": "gallons", "l": "liters", "forza": "Bleach strength on the label", "f6": "6%", "f825": "8.25%", "faltra": "Another strength", "forza_altra_msg": "The book gives the dose for 6% and 8.25% bleach only. For another strength, follow the directions on the label, or boil the water.", "acqua_tipo": "The water", "limpida": "Clear", "torbida": "Cloudy, colored or very cold (double dose)", "gocce": "Drops of bleach", "gocce_unita": "drops, rounded up", "attesa": "Then wait", "minuti": "minutes", "minuto": "minute", "attesa_dopo": "Stir. No faint chlorine smell? Repeat the dose and wait 15 more.", "controlla_quantita": "Enter the size of the container (0.1 to 500).", "candeggina_nota": "Settle and filter cloudy water first. No dropper: a little under 1/8 teaspoon per gallon (CDC), doubled for cloudy water. Never mix bleach with ammonia or any other cleaner. Always follow boil-water notices and instructions from your local authorities. Sources: EPA, CDC · Book: Skill 8.3-4.", "bollitura": "3 · Boiling time", "bollitura_intro": "Bring the water to a full rolling boil, then start counting (Skill 8.3-3).", "quota": "Your elevation", "quota_unita": "Unit", "ft": "feet", "m": "meters", "bolli": "Keep it at a rolling boil", "sopra": "Above 5,000 feet", "sotto": "5,000 feet or lower", "controlla_quota": "Enter your elevation (0 to 20,000).", "bollitura_nota": "This calculator uses the same rule as the book: the EPA’s stricter 5,000 feet. The CDC says 3 minutes above 6,500 feet; the current Air Force and Army manuals say above 8,000. Always follow boil-water notices and instructions from your local authorities.", "limiti": "What these numbers can’t fix", "frigo": "4 · The fridge clock", "frigo_intro": "Tap the button when the power goes out. The page counts the hours for the fridge and the freezer (Skill 11.4-1).", "spenta": "The power went out", "tornata": "Power is back", "ore_fa": "Went out earlier? How many hours ago:", "segna_prima": "Set the clock", "frigo_spento_no": "The clock isn’t running.", "frigo_da": "Power off for", "frigo_dalle": "since", "passato": "Time’s up", "ancora": "left, if the door stays shut", "frigo_regola": "Keep both doors shut. Throw out perishable food that sat above 40°F for 2 hours or more. Don’t taste to decide: when in doubt, throw it out (Skill 11.4-2). Source: CDC.", "frigo_medicine": "Medicines kept in the fridge: follow the label and ask your doctor or pharmacist (Skill 5.3-4). Oxygen, CPAP or another powered medical device: see Scenarios S13 and S14 in the book.", "frigo_limite": "The fridge clock only counts while you check it: it cannot send you an alert with the page closed.", "tornata_titolo": "Power is back?", "tornata_testo": "The clock will be cleared. Check the fridge and freezer thermometers before you keep any food.", "si_azzera": "Yes, clear the clock", "annulla": "Cancel", "generatore": "Generator & carbon monoxide", "riepilogo": "Your summary", "riepilogo_intro": "Print it, or save it as a PDF from your browser’s print window, and keep it with your stored water.", "stampa": "Print the summary", "r_acqua": "Water to store", "r_candeggina": "Bleach", "r_bollitura": "Boiling", "r_frigo": "Power off", "persona": "person", "persone_n": "people", "giorni": "days", "settimane": "weeks", "torbida_breve": "cloudy, colored or very cold", "limpida_breve": "clear", "gocce_breve": "drops", "attesa_breve": "wait 30 minutes", "m_breve": "m", "ft_breve": "ft", "ml_prima": "Or measure", "ml_dopo": "(CDC: ½ mL per gallon of 5–9% bleach)", "litro": "liter", "gallone": "gallon", "riepilogo_avvisi": "Always follow boil-water notices and instructions from your local authorities.", "riepilogo_911": "In an emergency, call 911."}, "id": "the-3-in-1-afr-64-4-fm-2-b2", "lingua": "en", "libro": "The 3-in-1 AFR 64-4, FM 21-76 & AFH 10-644 (SERE) Survival Manual for Home and Field", "autore": "Clayton R. Brisco", "colori": {"accento": "#3b4a2a", "secondo": "#e0a526"}, "codice_impronta": null};
+const DATI = {"_fonti": "Libro: 8.1-3, 8.3-3, 8.3-4, 8.3-7, 8.4-4, 11.4-1, 11.4-2, 5.3-4, 7.4-1, 7.4-2, 7.4-3, 7.4-5, S13-S15, S19 · 07: P25, P26, P41, P42, P50, P51, P52, P53, P54, P55, P56 · CDC «How to Make Water Safe in an Emergency» (19-09-2024, P50): ½ mL per gallon of 5-9% bleach", "galloni_al_giorno": 1, "giorni_minimo": 3, "giorni_obiettivo": 14, "gocce_per_gallone": {"6": 8, "8.25": 6}, "attesa_minuti": 30, "soglia_piedi": 5000, "minuti_sotto": 1, "minuti_sopra": 3, "limiti_frigo": [{"ore": 4, "etichetta": "Fridge, door shut", "dopo": "Throw out fridge meat, fish, eggs, milk and leftovers (Skill 11.4-2)."}, {"ore": 48, "etichetta": "Full freezer", "dopo": "Food with ice crystals, or at 40°F or below, can be refrozen or cooked. Otherwise throw it out (Skill 11.4-2)."}, {"ore": 24, "etichetta": "Half-full freezer", "dopo": "Food with ice crystals, or at 40°F or below, can be refrozen or cooked. Otherwise throw it out (Skill 11.4-2)."}], "limiti_calcolo": ["Boiling and bleach kill germs. They don’t remove fuel, chemicals or salt (Skill 8.3-7).", "If the water may hold fuel or chemicals, don’t drink it: use stored water and follow your local authorities.", "A private well after a flood: don’t drink the water, and don’t switch on the pump. See Skill 8.4-4 and Scenario S19."], "generatore": ["Never indoors: no generator, grill, camp stove or other gasoline engine in the house, basement or garage, even with the door open.", "Never heat the house with a gas stove or oven.", "Never run an unvented fuel heater where people sleep (Skill 7.4-4).", "The generator runs outside, at least 20 feet from windows, doors, vents and attached garages.", "Keep a carbon monoxide alarm that runs on batteries or has battery backup outside each sleeping area and on every level.", "Alarm sounds, or headache, dizziness or nausea: everyone outside to fresh air, then call 911. Then Scenario S15.", "Sources: CDC, Ready.gov, CPSC · Book: Skill 7.4, Scenario S15."], "salti": [["sez_generatore", "s_generatore"], ["sez_acqua", "s_acqua"], ["sez_candeggina", "s_candeggina"], ["sez_bollitura", "s_bollitura"], ["sez_frigo", "s_frigo"]], "ml_da_galloni": 5, "ml_per_gallone": 0.5};
+// Base comune delle web app dei bonus: testi, salvataggio nel browser, codice d'accesso, finestre (mai alert/confirm).
+"use strict";
+const T = (k, d) => (CONFIG.testi && CONFIG.testi[k] !== undefined ? CONFIG.testi[k] : d);
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const CHIAVE = "bonus:" + (CONFIG.id || "app");
+const Memoria = {
+  leggi(k, d) { try { const v = localStorage.getItem(CHIAVE + ":" + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+  scrivi(k, v) { try { localStorage.setItem(CHIAVE + ":" + k, JSON.stringify(v)); } catch (e) { /* senza memoria: si lavora lo stesso */ } },
+  togli(k) { try { localStorage.removeItem(CHIAVE + ":" + k); } catch (e) { /* niente */ } },
+};
+// FNV-1a 32 bit con sale: non è una serratura, è un deterrente (il codice non sta in chiaro nel file).
+function impronta(s) {
+  s = (CONFIG.id || "") + "|" + String(s).trim().toUpperCase().replace(/\s+/g, "");
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return h.toString(16);
+}
+function finestra(titolo, testo, bottoni) {
+  return new Promise((ok) => {
+    const m = document.createElement("div");
+    m.className = "modale";
+    m.innerHTML = `<div class="card" role="dialog" aria-modal="true"><h2>${esc(titolo)}</h2><p>${esc(testo)}</p><div class="row"></div></div>`;
+    const r = $(".row", m);
+    bottoni.forEach(([etichetta, valore, classe]) => {
+      const b = document.createElement("button");
+      b.textContent = etichetta; if (classe) b.className = classe;
+      b.onclick = () => { m.remove(); ok(valore); };
+      r.appendChild(b);
+    });
+    document.body.appendChild(m);
+    $("button", m).focus();
+  });
+}
+function intestazione() {
+  document.documentElement.lang = CONFIG.lingua || "en";
+  document.title = CONFIG.titolo;
+  if (CONFIG.colori) {
+    if (CONFIG.colori.accento) document.documentElement.style.setProperty("--acc", CONFIG.colori.accento);
+    if (CONFIG.colori.secondo) document.documentElement.style.setProperty("--sec", CONFIG.colori.secondo);
+  }
+  $("header.app .et").textContent = T("etichetta", "Extra content");
+  $("header.app h1").textContent = CONFIG.titolo;
+  $("header.app .sub").innerHTML = esc(T("per_lettori", "For readers of")) + " <i>" + esc(CONFIG.libro) + "</i>" + (CONFIG.autore ? " · " + esc(CONFIG.autore) : "");
+  const f = $("footer.app .in");
+  f.innerHTML = "";
+  [CONFIG.avvertenza, CONFIG.non_affiliato, T("memoria", "Your progress is saved only in this browser, on this device.")]
+    .filter(Boolean).forEach((t) => { const p = document.createElement("p"); p.textContent = t; f.appendChild(p); });
+}
+function porta(avvia) {
+  intestazione();
+  if (!CONFIG.codice_impronta || Memoria.leggi("aperta", false) === CONFIG.codice_impronta) { avvia(); return; }
+  const p = document.createElement("section");
+  p.id = "porta";
+  p.innerHTML = `<div class="card"><h2>${esc(T("codice_titolo", "Enter your access code"))}</h2>
+    <p class="muted">${esc(T("codice_dove", "You will find the code inside your copy of the book."))}</p>
+    <label class="lab" for="codice">${esc(T("codice_etichetta", "Access code"))}</label>
+    <input id="codice" type="text" autocomplete="off" autocapitalize="characters">
+    <p id="codice_err" class="ko nascosto">${esc(T("codice_errato", "This code doesn't match. Check it in the book and try again."))}</p>
+    <div class="row" style="margin-top:12px"><button id="codice_ok">${esc(T("codice_apri", "Open"))}</button></div></div>`;
+  $("main .in").prepend(p);
+  const prova = () => {
+    if (impronta($("#codice").value) === CONFIG.codice_impronta) { Memoria.scrivi("aperta", CONFIG.codice_impronta); p.remove(); avvia(); }
+    else { $("#codice_err").classList.remove("nascosto"); }
+  };
+  $("#codice_ok").onclick = prova;
+  $("#codice").addEventListener("keydown", (e) => { if (e.key === "Enter") prova(); });
+  $("#codice").focus();
+}
+function mescola(a, rnd = Math.random) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+// Bonus 2 · The Blackout & Safe-Water Calculator (web app su misura, fase 13)
+// Le regole e i numeri vengono dal libro, parola per parola (DATI): 8.1-3, 8.3-3, 8.3-4, 8.3-7, 8.4, 11.4-1, 11.4-2, 5.3-4, 7.4.
+const GAL_L = 3.78541;   // litri in un gallone USA (conversione, non una regola)
+const M_FT = 3.28084;    // piedi in un metro (conversione)
+const ORA = 3600000;
+
+const num = (x, d = 0) => Number(x).toLocaleString("en-US", { maximumFractionDigits: d, minimumFractionDigits: d });
+const scrivi = (id, k, d) => { const e = document.getElementById(id); if (e) e.textContent = T(k, d); };
+const lista = (sel, righe) => { $(sel).innerHTML = righe.map((r) => `<li>${esc(r)}</li>`).join(""); };
+const box = (etichetta, valore, unita, extra = "") =>
+  `<div class="r"><div class="muted">${esc(etichetta)}</div><div class="v">${valore}</div><div class="u">${esc(unita)}</div>${extra}</div>`;
+
+function intero(id, min, max) {
+  const v = parseFloat($("#" + id).value);
+  return isNaN(v) || v < min || v > max ? null : v;
+}
+function salva() {
+  Memoria.scrivi("valori", { persone: $("#persone").value, quantita: $("#quantita").value, unita: $("#unita").value,
+    forza: $("#forza").value, acqua_tipo: $("#acqua_tipo").value, quota: $("#quota").value, quota_unita: $("#quota_unita").value });
+}
+function ricarica() {
+  const v = Memoria.leggi("valori", {});
+  ["persone", "quantita", "unita", "forza", "acqua_tipo", "quota", "quota_unita"].forEach((k) => { if (v[k] !== undefined) $("#" + k).value = v[k]; });
+}
+
+// 1 · L'acqua di scorta: persone × giorni × 1 gallone (8.1-3)
+function acqua() {
+  const p = intero("persone", 1, 30);
+  if (p === null) { $("#ris_acqua").innerHTML = `<p class="ko">${esc(T("controlla_persone", "Enter how many people live in the house (1 to 30)."))}</p>`; return null; }
+  const g3 = p * DATI.galloni_al_giorno * DATI.giorni_minimo, g14 = p * DATI.galloni_al_giorno * DATI.giorni_obiettivo;
+  $("#ris_acqua").innerHTML =
+    box(T("minimo", "At least: 3 days"), num(g3), T("galloni", "gallons") + ` · ${num(g3 * GAL_L)} ` + T("litri", "liters")) +
+    box(T("obiettivo", "If you can: 2 weeks"), num(g14), T("galloni", "gallons") + ` · ${num(g14 * GAL_L)} ` + T("litri", "liters"));
+  return { p, g3, g14 };
+}
+
+// 2 · Le gocce di candeggina (8.3-4): 6% → 8 gocce, 8,25% → 6 gocce per gallone; doppio se torbida, colorata o molto fredda
+function candeggina() {
+  const q = intero("quantita", 0.1, 500);
+  const forza = $("#forza").value, torbida = $("#acqua_tipo").value === "torbida";
+  if (forza === "altra") { $("#ris_candeggina").innerHTML = `<p class="ko">${esc(T("forza_altra_msg", ""))}</p>`; return null; }
+  if (q === null) { $("#ris_candeggina").innerHTML = `<p class="ko">${esc(T("controlla_quantita", "Enter the size of the container (0.1 to 500)."))}</p>`; return null; }
+  const galloni = $("#unita").value === "l" ? q / GAL_L : q;
+  const perGallone = DATI.gocce_per_gallone[forza] * (torbida ? 2 : 1);
+  const gocce = Math.ceil(galloni * perGallone - 1e-9);
+  // contenitori grandi, solo 6%: la misura del CDC in millilitri (½ mL per gallone di candeggina al 5-9%, = 8 gocce)
+  const ml = forza === "6" && galloni >= DATI.ml_da_galloni ? galloni * DATI.ml_per_gallone * (torbida ? 2 : 1) : null;
+  $("#ris_candeggina").innerHTML =
+    box(T("gocce", "Drops of bleach"), num(gocce), T("gocce_unita", "drops, rounded up"),
+      ml === null ? "" : `<div class="u">${esc(T("ml_prima", "Or measure"))} <strong>${esc(num(ml, ml % 1 ? 1 : 0))} mL</strong> ${esc(T("ml_dopo", ""))}</div>`) +
+    box(T("attesa", "Then wait"), num(DATI.attesa_minuti), T("minuti", "minutes"), `<div class="u">${esc(T("attesa_dopo", ""))}</div>`);
+  return { q, unita: $("#unita").value, forza, torbida, gocce };
+}
+
+// 3 · I minuti di bollitura (8.3-3): 1 minuto; 3 sopra i 5.000 piedi (la soglia più severa, dell'EPA, come nel libro)
+function bollitura() {
+  const q = intero("quota", 0, 20000);
+  if (q === null) { $("#ris_bollitura").innerHTML = `<p class="ko">${esc(T("controlla_quota", "Enter your elevation (0 to 20,000)."))}</p>`; return null; }
+  const piedi = $("#quota_unita").value === "m" ? q * M_FT : q;
+  const minuti = piedi > DATI.soglia_piedi ? DATI.minuti_sopra : DATI.minuti_sotto;
+  $("#ris_bollitura").innerHTML = box(T("bolli", "Full rolling boil"), num(minuti), minuti === 1 ? T("minuto", "minute") : T("minuti", "minutes"),
+    `<div class="u">${esc(piedi > DATI.soglia_piedi ? T("sopra", "") : T("sotto", ""))}</div>`);
+  return { q, unita: $("#quota_unita").value, minuti };
+}
+
+// 5 · L'orologio del frigo (11.4-1): frigo chiuso circa 4 ore, congelatore pieno 48, mezzo pieno 24
+function durata(ms) {
+  const m = Math.max(0, Math.floor(ms / 60000));
+  const h = Math.floor(m / 60), r = m % 60;
+  return h ? `${h} h ${String(r).padStart(2, "0")} min` : `${r} min`;
+}
+function frigo() {
+  const inizio = Memoria.leggi("spenta_alle", null);
+  $("#tornata").disabled = !inizio;
+  if (!inizio) {
+    $("#frigo_stato").textContent = T("frigo_spento_no", "");
+    $("#ris_frigo").innerHTML = "";
+    return null;
+  }
+  const passato = Date.now() - inizio;
+  $("#frigo_stato").innerHTML = `${esc(T("frigo_da", "Power off for"))} <strong>${esc(durata(passato))}</strong> · ${esc(T("frigo_dalle", "since"))} ${esc(new Date(inizio).toLocaleString("en-US", { weekday: "short", hour: "numeric", minute: "2-digit" }))}`;
+  $("#ris_frigo").innerHTML = DATI.limiti_frigo.map((l) => {
+    const resta = l.ore * ORA - passato;
+    const fuori = resta <= 0;
+    return `<div class="r ${fuori ? "scaduto" : ""}"><div class="muted">${esc(l.etichetta)}</div>
+      <div class="v">${fuori ? esc(T("passato", "Past")) : esc(durata(resta))}</div>
+      <div class="u">${esc(fuori ? l.dopo : T("ancora", "left, if the door stays shut"))}</div></div>`;
+  }).join("");
+  return { passato };
+}
+function spenta(oreFa) {
+  Memoria.scrivi("spenta_alle", Date.now() - (oreFa || 0) * ORA);
+  frigo(); riepilogo();
+}
+
+// 7 · Il riepilogo da stampare
+function riepilogo() {
+  const a = acqua(), c = candeggina(), b = bollitura(), f = frigo();
+  const righe = [];
+  const unitaQ = (q, u) => u === "l" ? (q === 1 ? T("litro", "liter") : T("litri", "liters")) : (q === 1 ? T("gallone", "gallon") : T("galloni", "gallons"));
+  if (a) righe.push([T("r_acqua", "Water to store"), `${a.p} ${a.p === 1 ? T("persona", "person") : T("persone_n", "people")}: ${num(a.g3)} ${T("galloni", "gallons")} (3 ${T("giorni", "days")}) · ${num(a.g14)} ${T("galloni", "gallons")} (2 ${T("settimane", "weeks")})`]);
+  if (c) righe.push([T("r_candeggina", "Bleach"), `${num(c.q, c.q % 1 ? 1 : 0)} ${unitaQ(c.q, c.unita)} · ${c.forza}% · ${c.torbida ? T("torbida_breve", "cloudy, colored or very cold") : T("limpida_breve", "clear")}: ${num(c.gocce)} ${T("gocce_breve", "drops")}, ${T("attesa_breve", "wait 30 minutes")}`]);
+  if (b) righe.push([T("r_bollitura", "Boiling"), `${num(b.q)} ${b.unita === "m" ? T("m_breve", "m") : T("ft_breve", "ft")}: ${b.minuti} ${b.minuti === 1 ? T("minuto", "minute") : T("minuti", "minutes")}`]);
+  if (f) righe.push([T("r_frigo", "Power off"), durata(f.passato)]);
+  $("#riepilogo").innerHTML = `<p class="solo-stampa"><strong>${esc(CONFIG.titolo)}</strong><br>${esc(T("per_lettori", "For readers of"))} <i>${esc(CONFIG.libro)}</i></p>
+    <table class="t"><tbody>${righe.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}</tbody></table>
+    <p class="nota">${esc(T("riepilogo_avvisi", ""))}</p><p class="nota"><strong>${esc(T("riepilogo_911", ""))}</strong></p>`;
+}
+
+function avvia() {
+  [["t_intro", "intro"], ["t_acqua", "acqua"], ["t_acqua_intro", "acqua_intro"], ["t_persone", "persone"], ["t_acqua_nota", "acqua_nota"],
+   ["t_candeggina", "candeggina"], ["t_candeggina_intro", "candeggina_intro"], ["t_quantita", "quantita"], ["t_unita", "unita"],
+   ["t_gal", "gal"], ["t_l", "l"], ["t_forza", "forza"], ["t_f6", "f6"], ["t_f825", "f825"], ["t_faltra", "faltra"],
+   ["t_acqua_tipo", "acqua_tipo"], ["t_limpida", "limpida"], ["t_torbida", "torbida"], ["t_candeggina_nota", "candeggina_nota"],
+   ["t_bollitura", "bollitura"], ["t_bollitura_intro", "bollitura_intro"], ["t_quota", "quota"], ["t_quota_unita", "quota_unita"],
+   ["t_ft", "ft"], ["t_m", "m"], ["t_bollitura_nota", "bollitura_nota"], ["t_limiti", "limiti"],
+   ["t_frigo", "frigo"], ["t_frigo_intro", "frigo_intro"], ["spenta", "spenta"], ["tornata", "tornata"], ["t_ore_fa", "ore_fa"],
+   ["segna_prima", "segna_prima"], ["t_frigo_regola", "frigo_regola"], ["t_frigo_medicine", "frigo_medicine"], ["t_frigo_limite", "frigo_limite"],
+   ["t_generatore", "generatore"], ["t_riepilogo", "riepilogo"], ["t_riepilogo_intro", "riepilogo_intro"], ["stampa", "stampa"]]
+    .forEach(([id, k]) => scrivi(id, k, ""));
+  $("#salti").innerHTML = DATI.salti.map(([href, k]) => `<a href="#${href}">${esc(T(k, ""))}</a>`).join("");
+  lista("#limiti", DATI.limiti_calcolo);
+  lista("#generatore", DATI.generatore);
+  ricarica();
+  $$("#sez_acqua input, #sez_candeggina input, #sez_candeggina select, #sez_bollitura input, #sez_bollitura select")
+    .forEach((e) => { e.addEventListener("input", () => { salva(); riepilogo(); }); e.addEventListener("change", () => { salva(); riepilogo(); }); });
+  $("#spenta").onclick = () => spenta(0);
+  $("#segna_prima").onclick = () => { const h = parseFloat($("#ore_fa").value); spenta(isNaN(h) || h < 0 ? 0 : Math.min(h, 96)); };
+  $("#tornata").onclick = async () => {
+    const si = await finestra(T("tornata_titolo", "Power is back?"), T("tornata_testo", ""), [[T("si_azzera", "Yes, clear the clock"), true], [T("annulla", "Cancel"), false, "sec"]]);
+    if (si) { Memoria.togli("spenta_alle"); frigo(); riepilogo(); }
+  };
+  $("#stampa").onclick = () => { riepilogo(); window.print(); };
+  riepilogo();
+  setInterval(() => { frigo(); }, 30000);   // a pagina aperta il tempo si aggiorna; a ogni apertura si ricalcola
+}
+
+porta(avvia);
+</script>
+</body></html>

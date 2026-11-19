@@ -5,29 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Step 1 | The 3-in-1 Survival Manual</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="quaderno.css?v=1">
 </head>
 <body>
 <main class="pagina">
   <p class="etichetta">The 3-in-1 Survival Manual</p>
-  <div class="passi"><span class="attivo">Step 1</span><span>Step 2</span></div>
-  <h1>Just One Thing</h1>
-  <div class="filetto"></div>
 
-  <p class="attacco centro">This book has no big publisher behind it, only word of mouth.<br>Two honest lines on Amazon help the next reader decide.</p>
+  <div class="foglio-quaderno">
+    <span class="scotch sx"></span><span class="scotch dx"></span>
+    <span class="num-passo">Step 1 of 2</span>
+    <h1>Just One Thing</h1>
+    <p>This book has no big publisher behind it, only word of mouth.</p>
+    <p>Two honest lines on Amazon help the next reader decide.</p>
+    <p class="foto"><strong>&#128247; Add a photo or a video of the book.</strong> The book open on the table, a scenario page, the wall cards on the fridge: that is the first thing other readers look at.</p>
 
-  <a class="bottone brilla" id="vai-recensione" href="https://www.amazon.com/review/create-review?asin=ASIN-DA-INSERIRE" target="_blank" rel="noopener">&#9733; Write a Review on Amazon &#9733;</a>
-  <a class="bottone vuoto nascosto" id="vai-bonus" href="bonus.html">Go to Your Extra Content</a>
+    <a class="bottone brilla" id="vai-recensione" href="https://www.amazon.com/review/create-review?asin=ASIN-DA-INSERIRE" target="_blank" rel="noopener">&#9733; Write a Review &#9733;</a>
+    <p class="tempo">It takes less than a minute.</p>
+
+    <div class="dopo" id="dopo">
+      <p class="grazie">Thank you. Now on to your extra content.</p>
+      <a class="bottone vuoto" href="bonus.html">Go to Your Extra Content &rarr;</a>
+    </div>
+  </div>
 
   <footer>The 3-in-1 AFR 64-4, FM 21-76 &amp; AFH 10-644 (SERE) Survival Manual for Home and Field</footer>
 </main>
 <script>
-(function(){
-  var b=document.getElementById('vai-bonus');
-  function mostra(){b.classList.add('visibile');}
-  setTimeout(mostra,8000);
-  document.getElementById('vai-recensione').addEventListener('click',function(){setTimeout(mostra,1500);});
-})();
+document.getElementById('vai-recensione').addEventListener('click',function(){
+  setTimeout(function(){document.getElementById('dopo').classList.add('visibile');},1200);
+});
 </script>
 </body>
 </html>

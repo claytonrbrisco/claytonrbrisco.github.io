@@ -5,21 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Thank You | The 3-in-1 Survival Manual</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="quaderno.css?v=1">
+<style>
+.copertina{display:block;width:100%;max-width:520px;height:auto;margin:0 auto -18px;position:relative;z-index:1}
+.foglio-quaderno h1.grande{font-size:44px;letter-spacing:.01em}
+.dentro{list-style:none;margin:8px 0 0;padding:0 0 0 22px}
+.dentro li{display:flex;gap:12px;align-items:center;font-size:17px;line-height:32px;margin:0}
+.dentro li span{flex:0 0 26px;height:26px;border:1.5px solid var(--inchiostro);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:#fff}
+.timbro{position:absolute;right:18px;top:22px;transform:rotate(9deg);border:2px solid #a12a1f;color:#a12a1f;border-radius:6px;padding:4px 10px;font-size:12px;letter-spacing:.2em;font-weight:700;text-transform:uppercase;opacity:.85}
+</style>
 </head>
 <body>
 <main class="pagina">
   <p class="etichetta">The 3-in-1 Survival Manual</p>
-  <h1>Thank You</h1>
-  <div class="filetto"></div>
 
-  <img class="figura" src="mockup/bonus-tutti.png" alt="The three extra resources of the book: the Scenario Drill, the Blackout and Safe-Water Calculator, the Power-Out Wall Cards">
+  <img class="copertina" src="mockup/bonus-tutti.png" alt="The three extra resources of the book: the Scenario Drill, the Blackout and Safe-Water Calculator, the Power-Out Wall Cards">
 
-  <p class="attacco centro">The manual is yours now.<br>Your extra content is right here.</p>
-
-  <p class="firma">Clayton R. Brisco</p>
-
-  <a class="bottone" href="recensione.html">Next</a>
+  <div class="foglio-quaderno">
+    <span class="scotch sx"></span><span class="scotch dx"></span>
+    <span class="timbro">New reader</span>
+    <h1 class="grande">Thank You!</h1>
+    <p>The manual is yours now.</p>
+    <p>Waiting for you here:</p>
+    <ul class="dentro">
+      <li><span>1</span>What Comes First? The Scenario Drill</li>
+      <li><span>2</span>The Blackout &amp; Safe-Water Calculator</li>
+      <li><span>3</span>Power-Out Wall Cards</li>
+    </ul>
+    <p class="firma" style="margin-top:14px">Clayton R. Brisco</p>
+    <a class="bottone brilla" href="recensione.html">Get Your Extra Content &rarr;</a>
+  </div>
 
   <footer>The 3-in-1 AFR 64-4, FM 21-76 &amp; AFH 10-644 (SERE) Survival Manual for Home and Field</footer>
 </main>

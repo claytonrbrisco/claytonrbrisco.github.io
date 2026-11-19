@@ -4,38 +4,42 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#f3e3c8">
 <title>Step 1 | The 3-in-1 Survival Manual</title>
-<link rel="stylesheet" href="style.css?v=2">
-<link rel="stylesheet" href="quaderno.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
-<main class="pagina">
-  <p class="etichetta">The 3-in-1 Survival Manual</p>
+<main class="page">
+  <p class="wordmark">The 3-in-1 Survival Manual</p>
+  <ol class="route" aria-label="Steps">
+    <li aria-current="step"><span class="mark">1</span>Review</li>
+    <li class="dash" aria-hidden="true"></li>
+    <li><span class="mark">2</span>Extra content</li>
+  </ol>
+  <h1>Just one thing</h1>
+  <p class="lead">This book has no big publisher behind it, only word of mouth. Two honest lines on Amazon help the next reader decide.</p>
 
-  <img class="figura-pane" src="img/copertina.jpg" alt="Cover of the book">
-
-  <div class="foglio-quaderno">
-    <span class="scotch sx"></span><span class="scotch dx"></span>
-    <span class="num-passo">Step 1 of 2</span>
-    <h1>Just One Thing</h1>
-    <p>This book has no big publisher behind it, only word of mouth.</p>
-    <p>Two honest lines on Amazon help the next reader decide.</p>
-    <p class="foto"><strong>&#128247; Add a photo or a video of the book.</strong> The book open on the table, a scenario page, the wall cards on the fridge: that is the first thing other readers look at.</p>
-
-    <a class="bottone brilla" id="vai-recensione" href="https://www.amazon.com/review/create-review?asin=ASIN-DA-INSERIRE" target="_blank" rel="noopener">&#9733; Write a Review &#9733;</a>
-    <p class="tempo">It takes less than a minute.</p>
-
-    <div class="dopo" id="dopo">
-      <p class="grazie">Thank you. Now on to your extra content.</p>
-      <a class="bottone vuoto" href="bonus.html">Go to Your Extra Content &rarr;</a>
-    </div>
+  <div class="note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+    <p><strong>Add a photo or a video of the book.</strong> The book open on the table, a scenario page, the wall cards on the fridge: that is the first thing other readers look at.</p>
   </div>
 
-  <footer>The 3-in-1 AFR 64-4, FM 21-76 &amp; AFH 10-644 (SERE) Survival Manual for Home and Field</footer>
+  <a class="btn review" id="review" href="https://www.amazon.com/review/create-review?asin=ASIN-DA-INSERIRE" target="_blank" rel="noopener">Write a review on Amazon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+  <p class="meta after-note">It takes less than a minute</p>
+
+  <div class="next" id="next" hidden>
+    <p class="thanks">Thank you. Your extra content is ready.</p>
+    <a class="btn secondary" href="bonus.html">Go to your extra content <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+  </div>
+  <footer>
+    <p>The 3-in-1 AFR 64-4, FM 21-76 &amp; AFH 10-644 (SERE) Survival Manual for Home and Field · Clayton R. Brisco</p>
+    <p>Not affiliated with or endorsed by the U.S. Air Force or the U.S. Army</p>
+  </footer>
 </main>
 <script>
-document.getElementById('vai-recensione').addEventListener('click',function(){
-  setTimeout(function(){document.getElementById('dopo').classList.add('visibile');},1200);
+document.getElementById('review').addEventListener('click',function(){
+  var n=document.getElementById('next');
+  setTimeout(function(){n.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){n.classList.add('shown');});});},1200);
 });
 </script>
 </body>
